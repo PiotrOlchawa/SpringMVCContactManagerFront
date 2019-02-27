@@ -1,9 +1,11 @@
 $(document).ready(function () {
 
-    var usersRoot = ('http://localhost:8080/front-admin/user');
-    var facadeRoot = ('http://localhost:8080/front-admin/user');
-    var logoutLink = ('http://localhost:8080/logout');
-    var roleSplitCharacter = '|';
+    var usersRoot = CONFIG.serverRoot + CONFIG.usersRoot;
+    //var usersRoot = ('http://localhost:8080/front-admin/user');
+    var logoutLink = CONFIG.serverRoot + CONFIG.logoutLink;
+    //var logoutLink = ('http://localhost:8080/logout');
+    var roleSplitCharacter = CONFIG.roleSplitCharacter;
+    //var roleSplitCharacter = '|';
 
     function getUsers() {
         $.ajax({
@@ -82,7 +84,7 @@ $(document).ready(function () {
         }
         console.log(user);
         $.ajax({
-            url: facadeRoot,
+            url: usersRoot,
             method: 'post',
             async: false, //wait for response
             xhrFields: {
@@ -123,7 +125,7 @@ $(document).ready(function () {
         }
         console.log("user id" + $(this).closest('.center-div').find('#userId').val());
         $.ajax({
-            url: facadeRoot,
+            url: usersRoot,
             method: 'put',
             async: false, //wait for response
             xhrFields: {
@@ -144,7 +146,7 @@ $(document).ready(function () {
         }
         console.log($(this).closest('.center-div').find('#userId').val());
         $.ajax({
-            url: facadeRoot + '?' + $.param(id),
+            url: usersRoot + '?' + $.param(id),
             method: 'DELETE',
             async: false, //wait for response
             xhrFields: {

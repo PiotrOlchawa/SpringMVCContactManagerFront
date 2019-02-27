@@ -1,8 +1,11 @@
 $(document).ready(function () {
 
-    var roleSplitCharacter = '|';
-    var adminSucessfulLogin = "admin.html";
-    var userSucessfulLogin = "users.html";
+    var roleSplitCharacter = CONFIG.roleSplitCharacter;
+    //var roleSplitCharacter = '|';
+    var adminSucessfulLogin = CONFIG.adminSucessfulLogin;
+    //var adminSucessfulLogin = "admin.html";
+    var userSucessfulLogin = CONFIG.userSucessfulLogin;
+    //var userSucessfulLogin = "users.html";
 
     function make_base_auth(user, password) {
         var tok = user + ':' + password;

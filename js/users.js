@@ -1,8 +1,11 @@
 $(document).ready(function () {
 
-    var logoutLink = ('http://localhost:8080/logout');
-    var contactRoot = ('http://localhost:8080/front-user/contact');
-    var roleSplitCharacter = '|';
+    var logoutLink = CONFIG.serverRoot + CONFIG.logoutLink;
+    //var logoutLink = ('http://localhost:8080/logout');
+    var contactRoot = CONFIG.serverRoot + CONFIG.contactRoot;
+    //var contactRoot = ('http://localhost:8080/front-user/contact');
+    var roleSplitCharacter = CONFIG.roleSplitCharacter;
+    //var roleSplitCharacter = '|';
 
     /*SET USER*/
 

@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-    var mailRoot = 'http://localhost:8080/mail/';
+    var mailRoot = CONFIG.serverRoot + CONFIG.mailRoot;
+    //var mailRoot = 'http://localhost:8080/mail/';
 
     console.log("loaded");
     $("#messageToSend").val('rtertgertgertg');
