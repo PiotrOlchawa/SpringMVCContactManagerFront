@@ -5,9 +5,7 @@ $(document).ready(function () {
     var logoutLink = ('http://localhost:8080/logout');
     var roleSplitCharacter = '|';
 
-
     function getUsers() {
-
         $.ajax({
             url: usersRoot,
             method: 'GET',
@@ -26,7 +24,6 @@ $(document).ready(function () {
                         if (index < users.authorities.length - 1) {
                             authority += ',';
                         }
-                        ;
                     });
 
                     var html = '<div id="student-content" class="center-div">';
@@ -42,10 +39,6 @@ $(document).ready(function () {
                     html += '<div class="box row">';
                     html += '<input id="password" type="text" value="' + users.password + '">';
                     html += '</div>';
-
-                    /*    html+='<div class="box row">';
-                        html+='<input id="adressBook" type="text" value="'+users.adressBook+'">';
-                        html+='</div>';*/
 
                     html += '<div class="box row">';
                     html += '<input id="authorities" type="text" value="' + authority + '">';
@@ -76,14 +69,10 @@ $(document).ready(function () {
         console.log('add clicked');
 
         authoritiesSplited = $(this).closest('.center-div').find('#authorities').val().split(roleSplitCharacter);
-
         var auths = [];
-
         $.each(authoritiesSplited, function (index, value) {
             auths.push({authority: value});
         });
-
-        //console.log(auths);
 
         var user = {
             username: $(this).closest('.center-div').find('#username').val(),
@@ -111,7 +100,6 @@ $(document).ready(function () {
             $('#add-content').find('#firstName').val('');
             $('#add-content').find('#secondName').val('');
             reloadStudentContent();*/
-
     });
 
     /*MODIFY*/
@@ -125,8 +113,6 @@ $(document).ready(function () {
         $.each(authoritiesSplited, function (index, value) {
             auths.push({authority: value});
         });
-
-        //console.log(auths);
 
         var user = {
             id: $(this).closest('.center-div').find('#userId').val(),
@@ -150,7 +136,6 @@ $(document).ready(function () {
         location.reload();
     });
 
-
     /*DELETE*/
     $('body').on('click', 'button#delete', function (event) {
         console.log('delete clicked');
@@ -170,7 +155,6 @@ $(document).ready(function () {
         location.reload();
     });
 
-
     /*LOGOUT*/
     $('body').on('click', 'a#logout', function (event) {
         event.preventDefault();
@@ -184,5 +168,4 @@ $(document).ready(function () {
             success: window.location = "login.html"
         });
     });
-
 });

@@ -59,16 +59,13 @@ label {
     justify-content: center;
 }
 
-
 .button {
     width: 9%;
 }
 
 .buttoninside {
     margin-left: 3px;
-
 }
-
 
 button {
     width: 100px;

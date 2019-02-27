@@ -4,8 +4,6 @@ $(document).ready(function () {
     var contactRoot = ('http://localhost:8080/front-user/contact');
     var roleSplitCharacter = '|';
 
-    //var mywindow='';
-
     /*SET USER*/
 
     var showUser = $.cookie('USER') + ' CONTACTS';
@@ -16,20 +14,22 @@ $(document).ready(function () {
     if (rolesSplited.indexOf("ROLE_ADMIN") > -1) {
         console.log("adding navBar link to admin page");
         $('body').find('a#logout').removeClass();
-        $('body').find('ul#navBar').append("<li><a id=\"users\" class=\"active\" href=\"admin.html\">ADMIN</a></li>");
+        $('body').find('ul#navBar').append("<li><a id=\"users\" class=\"active\" href=\"../admin.html\">ADMIN</a></li>");
     }
 
     //Add link for admin to admin page
 
     $('body').find('#user').text(showUser.toUpperCase());
 
-
     function mailPopup(contactId) {
 
         console.log('Contact id ' + contactId);
 
+        var loc = window.location.origin + window.location.pathname;
+        var path = loc.substring(0, loc.lastIndexOf('/'));
+
         var head = "<title>Mail Contact</title>";
-        head += '<link rel="stylesheet" type="text/css" href="http://localhost/contactmanager/mail.css">';
+        head += '<link rel="stylesheet" type="text/css" href="' + path + '/css/mail.css">';
 
         var content = '<div id="content">';
         content += '<div hidden>';
@@ -52,13 +52,12 @@ $(document).ready(function () {
         var h = 160;
         var left = (screen.width / 2) - (w / 2);
         var top = (screen.height / 2) - (h / 2);
-        var mywindow = window.open('', 'title', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+        var mywindow = window.open('', 'title', 'toolbar=no, location=yes, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
         $(mywindow.document.head).html(head);
         $(mywindow.document.body).html(content/*+scriptContent*/);
         sendMail(mywindow);
         return true;
     }
-
 
     /*GET CONTACTS*/
 
@@ -292,6 +291,4 @@ $(document).ready(function () {
             });
         });
     }
-
-
 });
