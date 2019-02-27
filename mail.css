@@ -1,38 +1,35 @@
 
 body {
-	background-color: #999966;
+    background-color: #999966;
 }
 
 
 .box {
-	position: relative;
-/*	width: 140px;
-	padding: 0px;
-	color: black;
-	margin-top: 0px;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-bottom: 0px;*/
+    position: relative;
+    /*	width: 140px;
+        padding: 0px;
+        color: black;
+        margin-top: 0px;
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-bottom: 0px;*/
 }
-
 
 .row {
-	height: 45px;
+    height: 45px;
 }
 
-
-.box input,button {
-  bottom: 0;
-  left: 0;
-  margin-top: 40px;
+.box input, button {
+    bottom: 0;
+    left: 0;
+    margin-top: 40px;
 }
-
 
 
 .center-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 

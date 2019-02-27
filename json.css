@@ -1,109 +1,108 @@
 
 body {
-	background-color: #999966;
+    background-color: #999966;
 }
 
 h1 {
-	text-align: center;
-	margin-top: 10px;
-	margin-bottom: 0px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 
 .hidden {
-	display: none;
+    display: none;
 }
 
 .box {
-	position: relative;
-	width: 140px;
-	padding: 0px;
-	color: black;
-	margin-top: 0px;
+    position: relative;
+    width: 140px;
+    padding: 0px;
+    color: black;
+    margin-top: 0px;
     margin-right: 10px;
     margin-left: 10px;
     margin-bottom: 0px;
 }
 
 label {
-	padding-bottom:  35px;
+    padding-bottom: 35px;
 }
 
 .row {
-	height: 45px;
+    height: 45px;
 }
 
 
-.box input,button {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.box input, button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 
 .box p {
-	text-transform: uppercase; 
-	margin-bottom: 0px;
-	margin-top: 15px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    margin-top: 15px;
 }
 
 .header {
-	text-align: center;
-	text-transform: uppercase;
-	margin-bottom: 1px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1px;
 }
 
 .center-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
 
 
 .button {
-	width:9%;
+    width: 9%;
 }
 
 .buttoninside {
-	margin-left: 3px;
+    margin-left: 3px;
 
 }
 
 
 button {
-	width: 100px
-	margin-bottom: 0px;
+    width: 100px;
+    margin-bottom: 0px;
 }
 
 div input {
-	width: 100px;
+    width: 100px;
 }
 
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
 }
 
 li {
-  float: left;
+    float: left;
 }
 
 li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
 li a:hover:not(.active) {
-  background-color: #111;
+    background-color: #111;
 }
 
 .active {
-  background-color: #4CAF50;
+    background-color: #4CAF50;
 }

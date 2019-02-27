@@ -1,139 +1,139 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-	function reloadStudentContent(){
+    function reloadStudentContent() {
 
-		$('div[id=student-content]').each(function(index){
-		console.log(index);
-		$(this).remove();
-		});
+        $('div[id=student-content]').each(function (index) {
+            console.log(index);
+            $(this).remove();
+        });
 
-		getStudentsFromDatabase();
-	}
+        getStudentsFromDatabase();
+    }
 
-    const usersRoot=('http://localhost:8080/admin/users')
-
-
-/*LOAD STUDENT CONTENET*/
-
-	function getStudentsFromDatabase(){
-			
-	$.ajax({
-	url: usersRoot,
-	method: 'GET',
-	contentType: 'application/json',
-	success: function(response){ 
-		console.log(response);
-		$.each(response,function(index,users){
-			
-		var html='<div id="student-content" class="center-div">';
-
-		html+='<div hidden>';
-		html+='<input id="userId" type="text" value="'+users.id+'">';
-		html+='</div>';
-
-		html+='<div class="box row">';
-		html+='<input id="firstName" type="text" value="'+users.username+'">';
-		html+='</div>';
-	 
-		html+='<div class="box row">';
-		html+='<input id="secondName" type="text" value="'+users.password+'">';
-		html+='</div>';
-
-		html+='<div class="box row button">';
-		html+='<button id="modify">Aktualizuj</button>';
-		html+='</div>';
-
-		html+='<div class="box row button" >';
-		html+='<button id="delete">Usun</button>';
-		html+='</div>';
-
-		html+='</div>';
-
-		$('#content').prepend(html);
-
-		});
-	}
-	});
-	}
-
-	getStudentsFromDatabase();
-
-/*ADD*/
-
-	$('body').on('click','div #add',function(event){
-		console.log('add clicked');
-		var student = {
-			firstName : $(this).closest('.center-div').find('#firstName').val(),
-			secondName : $(this).closest('.center-div').find('#secondName').val(),
-			birthDate : $(this).closest('.center-div').find('#birdthDate').val(),
-			pesel: $(this).closest('.center-div').find('#pesel').val()
-		}
-		console.log(firstName);
-		$.ajax({
-			url: apiRoot,
-			method: 'post',
-			contentType: 'application/json',
-			dataType: 'json',
-			data: JSON.stringify(student)
-		});
-
-		/*wyczyszczenie pol add*/
-		$('#add-content').find('#pesel').val('');
-		$('#add-content').find('#birdthDate').val('');
-		$('#add-content').find('#firstName').val('');
-		$('#add-content').find('#secondName').val('');
-		reloadStudentContent();
-
-	});
-
-/*MODIFY*/
+    const usersRoot = ('http://localhost:8080/admin/users')
 
 
-	$('body').on('click','div #modify',function(event){
+    /*LOAD STUDENT CONTENET*/
 
-		var student = {
-			id : $(this).closest('.center-div').find('#studentId').val(),
-			firstName : $(this).closest('.center-div').find('#firstName').val(),
-			secondName : $(this).closest('.center-div').find('#secondName').val(),
-			birthDate : $(this).closest('.center-div').find('#birdthDate').val(),
-			pesel: $(this).closest('.center-div').find('#pesel').val()
-		}
+    function getStudentsFromDatabase() {
 
-		console.log(student);
+        $.ajax({
+            url: usersRoot,
+            method: 'GET',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                $.each(response, function (index, users) {
 
-	$.ajax({
-		url: apiRoot,
-		method: 'put',
-		contentType: 'application/json',
-		dataType: 'json',
-		data: JSON.stringify(student),
-		});	
+                    var html = '<div id="student-content" class="center-div">';
 
-		reloadStudentContent();
+                    html += '<div hidden>';
+                    html += '<input id="userId" type="text" value="' + users.id + '">';
+                    html += '</div>';
 
-	});
+                    html += '<div class="box row">';
+                    html += '<input id="firstName" type="text" value="' + users.username + '">';
+                    html += '</div>';
+
+                    html += '<div class="box row">';
+                    html += '<input id="secondName" type="text" value="' + users.password + '">';
+                    html += '</div>';
+
+                    html += '<div class="box row button">';
+                    html += '<button id="modify">Aktualizuj</button>';
+                    html += '</div>';
+
+                    html += '<div class="box row button" >';
+                    html += '<button id="delete">Usun</button>';
+                    html += '</div>';
+
+                    html += '</div>';
+
+                    $('#content').prepend(html);
+
+                });
+            }
+        });
+    }
+
+    getStudentsFromDatabase();
+
+    /*ADD*/
+
+    $('body').on('click', 'div #add', function (event) {
+        console.log('add clicked');
+        var student = {
+            firstName: $(this).closest('.center-div').find('#firstName').val(),
+            secondName: $(this).closest('.center-div').find('#secondName').val(),
+            birthDate: $(this).closest('.center-div').find('#birdthDate').val(),
+            pesel: $(this).closest('.center-div').find('#pesel').val()
+        }
+        console.log(firstName);
+        $.ajax({
+            url: apiRoot,
+            method: 'post',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(student)
+        });
+
+        /*wyczyszczenie pol add*/
+        $('#add-content').find('#pesel').val('');
+        $('#add-content').find('#birdthDate').val('');
+        $('#add-content').find('#firstName').val('');
+        $('#add-content').find('#secondName').val('');
+        reloadStudentContent();
+
+    });
+
+    /*MODIFY*/
 
 
-/*DELETE*/
+    $('body').on('click', 'div #modify', function (event) {
 
-	$('body').on('click','button#delete',function(event){
+        var student = {
+            id: $(this).closest('.center-div').find('#studentId').val(),
+            firstName: $(this).closest('.center-div').find('#firstName').val(),
+            secondName: $(this).closest('.center-div').find('#secondName').val(),
+            birthDate: $(this).closest('.center-div').find('#birdthDate').val(),
+            pesel: $(this).closest('.center-div').find('#pesel').val()
+        }
 
-	console.log('delete clicked');
+        console.log(student);
 
-	var id = {
-	id : $(this).closest('.center-div').find('#studentId').val()
-	}
+        $.ajax({
+            url: apiRoot,
+            method: 'put',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(student),
+        });
 
-	console.log($(this).closest('.center-div').find('#studentId').val());
+        reloadStudentContent();
 
-	$.ajax({
-		url: apiRoot + '?' + $.param(id),
-		method: 'DELETE',
-		contentType: 'application/json',
-	});
+    });
 
-	location.reload();
 
-	});
+    /*DELETE*/
+
+    $('body').on('click', 'button#delete', function (event) {
+
+        console.log('delete clicked');
+
+        var id = {
+            id: $(this).closest('.center-div').find('#studentId').val()
+        }
+
+        console.log($(this).closest('.center-div').find('#studentId').val());
+
+        $.ajax({
+            url: apiRoot + '?' + $.param(id),
+            method: 'DELETE',
+            contentType: 'application/json',
+        });
+
+        location.reload();
+
+    });
 
 });
