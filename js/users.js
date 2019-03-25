@@ -6,6 +6,8 @@ $(document).ready(function () {
     //var contactRoot = ('http://localhost:8080/front-user/contact');
     var roleSplitCharacter = CONFIG.roleSplitCharacter;
     //var roleSplitCharacter = '|';
+    var mailRoot = CONFIG.serverRoot + CONFIG.mailRoot;
+    var smsRoot = CONFIG.serverRoot + CONFIG.smsRoot;
 
     /*SET USER*/
 
@@ -24,7 +26,7 @@ $(document).ready(function () {
 
     $('body').find('#user').text(showUser.toUpperCase());
 
-    function mailPopup(contactId) {
+    function sendMessagePopup(contactId) {
 
         console.log('Contact id ' + contactId);
 
@@ -44,11 +46,24 @@ $(document).ready(function () {
         content += '<textarea id="messageToSend" rows="4" cols="50">Write your message here</textarea>';
         content += '</div>';
         content += '</div>';
+
         content += '<div id="add-content" class="center-div">';
         content += '<div class="box row">';
         content += '<button id="mailContact" >Send Mail</button>';
         content += '</div>';
+        content += '<div class="box row"><p>&nbsp&nbsp&nbsp&nbsp</p>';
         content += '</div>';
+        content += '<div class="box row">';
+        content += '<button id="smsContact" >Send SMS</button>';
+        content += '</div>';
+        content += '</div>';
+
+/*        content += '<div id="add-content" class="center-div">';
+        content += '<div class="box row">';
+        content += '<button id="smsContact" >Send SMS</button>';
+        content += '</div>';
+        content += '</div>';*/
+
         content += '</div>';
 
         var w = 640;
@@ -113,15 +128,15 @@ $(document).ready(function () {
 
 
                     html += '<div class="box row button">';
-                    html += '<button id="modify">Aktualizuj</button>';
+                    html += '<button id="modify">Update</button>';
                     html += '</div>';
 
                     html += '<div class="box row button" >';
-                    html += '<button id="delete">&nbsp Usun &nbsp</button>';
+                    html += '<button id="delete">&nbsp Delete &nbsp</button>';
                     html += '</div>';
 
                     html += '<div class="box row button" >';
-                    html += '<button id="sendMail">&nbsp Mail &nbsp </button>';
+                    html += '<button id="sendMail">&nbsp Message &nbsp </button>';
                     html += '</div>';
 
                     html += '</div>';
@@ -238,11 +253,11 @@ $(document).ready(function () {
         });
     });
 
-    /*POPUP SENDMAIL*/
+    /*POPUP sendMail Popup*/
     $('body').on('click', '#sendMail', function (event) {
         console.log("sendMail clicked");
         var contactId = $(this).closest('.center-div').find('#contactId').val();
-        mailPopup(contactId);
+        sendMessagePopup(contactId);
 
     });
 
@@ -250,10 +265,13 @@ $(document).ready(function () {
         $(mywindow.document).ready(function () {
             //$(mywindow.document).contents().find('#tdProduct').html('2');
 
-            var mailRoot = 'http://localhost:8080/mail/';
+            //var mailRoot = 'http://localhost:8080/mail/';
 
             console.log("loaded");
-            $("#messageToSend").val('rtertgertgertg');
+            //$("#messageToSend").val('rtertgertgertg');
+
+            //SEND mail message button action
+
             $(mywindow.document).contents().on('click', '#mailContact', function (event) {
                 event.preventDefault();
                 console.log('sendMail clicked');
@@ -292,6 +310,52 @@ $(document).ready(function () {
                 }).fail(function (data) {
                 });
             });
+
+
+            //SEND sms message button action
+            $(mywindow.document).contents().on('click', '#smsContact', function (event) {
+                event.preventDefault();
+                console.log('sendSms clicked');
+
+                var mailWindowContent = $(mywindow.document).contents();
+                var contactId = mailWindowContent.find('#contactId').val();
+                var sendMessage = {
+                    message: mailWindowContent.find('#messageToSend').val()
+                }
+
+                $.ajax({
+                    url: smsRoot + contactId,
+                    method: 'post',
+                    async: false, //wait for response
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(sendMessage),
+                    success: function (response) {
+                        console.log(response["message"]);
+
+                        sendResult = '<div id="add-content" class="center-div">';
+                        sendResult += '<div class="box row">';
+                        sendResult += '<p>' + response["message"] + '</p>';
+                        sendResult += '</div>';
+                        sendResult += '</div>';
+
+                        mailWindowContent.find('#content').append(sendResult);
+                    },
+                    error: function (xhr, textStatus) {
+                        console.log(' error status code ' + xhr.status);
+                    }
+                }).done(function (data) {
+                }).fail(function (data) {
+                });
+            });
+
+
+
+
+
         });
     }
 });

@@ -7,6 +7,9 @@ $(document).ready(function () {
     var userSucessfulLogin = CONFIG.userSucessfulLogin;
     //var userSucessfulLogin = "users.html";
 
+    $('#login-form').attr('action', CONFIG.serverRoot + '/login');
+
+
     function make_base_auth(user, password) {
         var tok = user + ':' + password;
         var hash = btoa(tok);
